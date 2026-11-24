@@ -1,4 +1,4 @@
-// wormscore.com: highlight the visitor's download, show the latest version, copy the citation.
+// wormscore.org: highlight the visitor's download, show the latest version, copy the citation.
 // The page works without this file: both buttons always link to the newest release.
 (function () {
   "use strict";
