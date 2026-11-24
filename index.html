@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>wormscore: blind scoring of C. elegans images</title>
+<title>wormscore</title>
 <meta name="description" content="Free desktop app for blind scoring of fluorescent neurons in C. elegans microscope images. Runs on your computer, reads microscope files as they are, and writes the tables, tests and a draft Methods paragraph when you unblind.">
 <meta name="author" content="Arjun Bansal">
 <meta name="color-scheme" content="light dark">
@@ -24,6 +24,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="style.css">
 <script src="site.js" defer></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "wormscore",
+  "description": "Blind scoring of fluorescent neurons in C. elegans microscope images.",
+  "url": "https://wormscore.com/",
+  "applicationCategory": "ScientificApplication",
+  "operatingSystem": "Windows 10, Windows 11, macOS (Apple silicon)",
+  "license": "https://opensource.org/licenses/MIT",
+  "author": { "@type": "Person", "name": "Arjun Bansal" },
+  "codeRepository": "https://github.com/arjunkai/wormscore",
+  "sameAs": ["https://github.com/arjunkai/wormscore", "https://doi.org/10.5281/zenodo.23520610", "https://pypi.org/project/wormscore/"],
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -35,28 +51,29 @@
       <a href="#how">How it works</a>
       <a href="#install">Install</a>
       <a href="#cite">Cite</a>
-      <a href="https://github.com/arjunkai/wormscore">GitHub</a>
+      <a href="https://github.com/arjunkai/wormscore" target="_blank" rel="noopener">GitHub</a>
     </nav>
   </div>
 </header>
 
 <main id="main">
   <section class="hero wrap" aria-labelledby="title">
+    <img class="hero-icon" src="img/icon.svg" alt="" width="72" height="72">
     <h1 id="title">wormscore</h1>
     <p class="lede">Blind scoring of fluorescent neurons in <i>C.&nbsp;elegans</i> microscope images.</p>
-    <p class="sub">You score coded images without knowing the genotype. wormscore keeps the key sealed, measures
-      the cells, and writes the tables, the tests and a draft Methods paragraph when you unblind.</p>
+    <p class="sub">You score coded images without knowing the genotype. wormscore keeps the genotype key sealed, measures
+      the cells, and writes the tables, the tests and a draft Methods paragraph when you unblind. Free and open source.</p>
 
     <div class="dl" role="group" aria-label="Download">
       <a class="dl-btn" id="dl-win" href="https://github.com/arjunkai/wormscore/releases/latest/download/wormscore-windows.zip">
-        <svg class="dl-ic" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v10m0 0-4-4m4 4 4-4M4 16h12"/></svg>
+        <svg class="dl-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 3.4 9.8 2v9.5H0zM10.9 1.9 24 0v11.5H10.9zM0 12.6h9.8v9.5L0 20.6zM10.9 12.6H24V24l-13.1-1.9z"/></svg>
         <span class="dl-text"><span class="dl-main">Download for Windows</span><span class="dl-sub">Windows 10 and 11</span></span>
       </a>
       <a class="dl-btn" id="dl-mac" href="https://github.com/arjunkai/wormscore/releases/latest/download/wormscore-mac.zip">
-        <svg class="dl-ic" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v10m0 0-4-4m4 4 4-4M4 16h12"/></svg>
-        <span class="dl-text"><span class="dl-main">Download for Mac</span><span class="dl-sub">Apple silicon (M1 and newer)</span></span>
+        <svg class="dl-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.913 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+        <span class="dl-text"><span class="dl-main">Download for Mac</span><span class="dl-sub">Apple silicon (M1 or newer)</span></span>
       </a>
-      <a class="gh-btn" href="https://github.com/arjunkai/wormscore">
+      <a class="gh-btn" href="https://github.com/arjunkai/wormscore" target="_blank" rel="noopener">
         <svg class="gh-ic" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
         View on GitHub
       </a>
@@ -64,9 +81,9 @@
     <p class="meta">
       <span id="ver">Latest version</span>
       <span class="dot" aria-hidden="true">·</span>
-      <a id="notes" href="https://github.com/arjunkai/wormscore/releases/latest">Release notes</a>
+      <a id="notes" href="https://github.com/arjunkai/wormscore/releases/latest" target="_blank" rel="noopener">Release notes</a>
       <span class="dot" aria-hidden="true">·</span>
-      <a href="https://github.com/arjunkai/wormscore/releases">All releases</a>
+      <a href="https://github.com/arjunkai/wormscore/releases" target="_blank" rel="noopener">All releases</a>
       <span class="dot" aria-hidden="true">·</span>
       <span>or <code>pip install wormscore</code></span>
     </p>
@@ -77,7 +94,7 @@
         <img src="img/scoring.png" fetchpriority="high" width="2040" height="1140" alt="The scoring page: a coded image of a worm head with brightfield on, the list of codes on the left and the questions for each cell on the right">
       </picture>
       <figcaption>The scoring page, with a real worm from the demo: an L2 head with the BAG neurons marked
-        (flp-17::GFP), from Sun and Hobert 2021 (<a href="https://doi.org/10.5281/zenodo.5602160">Zenodo&nbsp;5602160</a>, CC&nbsp;BY&nbsp;4.0).</figcaption>
+        (flp-17::GFP), from Sun and Hobert 2021 (<a href="https://doi.org/10.5281/zenodo.5602160" target="_blank" rel="noopener">Zenodo&nbsp;5602160</a>, CC&nbsp;BY&nbsp;4.0).</figcaption>
     </figure>
   </section>
 
@@ -94,8 +111,8 @@
       </ol>
       <p class="formats">Reads microscope files as they are: Leica <code>.lif</code>, Zeiss <code>.czi</code>,
         Nikon <code>.nd2</code>, Olympus <code>.oib</code>, <code>.oif</code> and <code>.oir</code>, OME-TIFF and
-        ImageJ hyperstack TIFF. Which channel is the reporter is read from the file, never guessed.
-        Not tied to one neuron, marker or organism.</p>
+        ImageJ hyperstack TIFF. The reporter channel is read from the file's metadata, never guessed.
+        Nothing is tied to one neuron, marker or organism.</p>
     </div>
   </section>
 
@@ -103,18 +120,18 @@
     <h2 id="why-h">Why it matters</h2>
     <div class="grid">
       <div class="card"><h3>Blind until you finish</h3><p>Genotypes and file names stay in a sealed key until scoring is done. No genotype or file name reaches the scoring page.</p></div>
-      <div class="card"><h3>Hidden repeats</h3><p>A share of images can come back under new codes. Unblinding reports how consistently you scored them.</p></div>
+      <div class="card"><h3>Hidden repeats</h3><p>Some images can come back a second time under new codes. Unblinding reports how consistently you scored them.</p></div>
       <div class="card"><h3>A second scorer</h3><p>Send a colleague some of the coded images, without the key. Unblinding reports how well you agree.</p></div>
       <div class="card"><h3>Every step logged</h3><p>Every parameter and software version goes into the project's <code>log.md</code>. Every number links to its file and SHA-256 checksum.</p></div>
-      <div class="card"><h3>Methods you can check</h3><p>The draft Methods paragraph is built from the project files. The <a href="https://github.com/arjunkai/wormscore/blob/main/docs/METHODS.md">Methods document</a> explains how everything is read, measured and tested.</p></div>
-      <div class="card"><h3>Measured, not decided</h3><p>Cells are measured, but the numbers are hidden while you score. The software never makes a call for you.</p></div>
+      <div class="card"><h3>Methods you can check</h3><p>The draft Methods paragraph is built from the project files. The <a href="https://github.com/arjunkai/wormscore/blob/main/docs/METHODS.md" target="_blank" rel="noopener">Methods document</a> explains how everything is read, measured and tested.</p></div>
+      <div class="card"><h3>Measured, not decided</h3><p>Suggested cells and the ones you outline are measured, but the numbers stay hidden while you score. The software never makes a call for you.</p></div>
     </div>
   </section>
 
   <section class="band" id="install" aria-labelledby="install-h">
     <div class="wrap">
       <h2 id="install-h">Install</h2>
-      <p class="intro">The apps are not signed, so the first time you open one the system asks before it runs.</p>
+      <p class="intro">The apps are not signed, so Windows and macOS ask before opening them the first time.</p>
       <div class="grid two">
         <div class="col">
         <div class="card">
@@ -148,27 +165,34 @@ wormscore-launcher</code></pre>
           <p class="req">Needs a Mac with Apple silicon (M1 or newer). The app opens in your web browser. Use a normal window: Safari Private windows, Brave and Firefox with fingerprinting protection change the image data.</p>
         </div>
       </div>
-      <p class="after">New to it? Click <b>Try a demo...</b> in the app: 20 simulated worm heads in two genotypes, with the answers to check your calls against.
-        The <a href="https://github.com/arjunkai/wormscore/blob/main/docs/GUIDE.md">user guide</a> covers every step.</p>
+      <p class="after">New to wormscore? Click <b>Try a demo...</b> in the app. It has 20 simulated worm heads in two genotypes, with the answers to check your calls against.
+        The <a href="https://github.com/arjunkai/wormscore/blob/main/docs/GUIDE.md" target="_blank" rel="noopener">user guide</a> covers every step.</p>
     </div>
   </section>
 
   <section class="wrap sect" id="cite" aria-labelledby="cite-h">
     <h2 id="cite-h">Cite</h2>
-    <p>If you use wormscore in research, please cite the version you used. In the app, <b>Settings &gt; Copy citation</b>
-      gives it. The DOI <a href="https://doi.org/10.5281/zenodo.23520610">10.5281/zenodo.23520610</a> covers all versions;
-      each release also has its own.</p>
+    <p>If you use wormscore in research, please cite the version you used. The citations below name the
+      latest version; in the app, <b>Settings &gt; Copy citation</b> gives the one you have. The DOI
+      <a href="https://doi.org/10.5281/zenodo.23520610" target="_blank" rel="noopener">10.5281/zenodo.23520610</a> covers all versions, and each release also has its own.</p>
     <div class="cite">
       <div class="cite-head">
-        <span>BibTeX</span>
-        <button type="button" class="copy" id="copy" hidden>Copy</button>
+        <span id="apa-h">APA</span>
+        <button type="button" class="copy" data-copy="apa" aria-label="Copy APA citation" hidden>Copy</button>
       </div>
-      <pre id="bibtex" tabindex="0" aria-label="BibTeX citation"><code>@software{Bansal_wormscore_2026,
+      <p class="cite-apa" id="apa" tabindex="0" aria-labelledby="apa-h">Bansal, A. (2026). <i>wormscore: blind scoring and fluorescence measurement of neurons in confocal z-stacks</i> (Version <span class="cite-ver">1.26.27</span>) [Computer software]. https://doi.org/10.5281/zenodo.23520610</p>
+    </div>
+    <div class="cite">
+      <div class="cite-head">
+        <span id="bib-h">BibTeX</span>
+        <button type="button" class="copy" data-copy="bibtex" aria-label="Copy BibTeX citation" hidden>Copy</button>
+      </div>
+      <pre id="bibtex" tabindex="0" aria-labelledby="bib-h"><code>@software{Bansal_wormscore_2026,
   author = {Bansal, Arjun},
   doi = {10.5281/zenodo.23520610},
   title = {{wormscore: blind scoring and fluorescence measurement of neurons in confocal z-stacks}},
   url = {https://github.com/arjunkai/wormscore},
-  version = {<span id="bib-ver">1.26.27</span>},
+  version = {<span class="cite-ver">1.26.27</span>},
   year = {2026}
 }</code></pre>
     </div>
@@ -179,9 +203,12 @@ wormscore-launcher</code></pre>
     <div class="wrap narrow">
       <h2 id="privacy-h">Privacy</h2>
       <p>wormscore runs on your computer. Your images, projects and scores never leave it.</p>
-      <p>The app goes online only to check for updates (one request to GitHub for the latest version number,
-        which sends nothing about you or your projects; you can turn it off in Settings), to install an update
-        you choose, and to download the optional real-worm demo images.</p>
+      <p>The app goes online for three things only:</p>
+      <ul class="plain">
+        <li>checking for updates: one request to GitHub for the latest version number, which sends nothing about you or your projects (you can turn this off in Settings)</li>
+        <li>installing an update you choose</li>
+        <li>downloading the optional real-worm demo images</li>
+      </ul>
     </div>
   </section>
 </main>
@@ -189,15 +216,15 @@ wormscore-launcher</code></pre>
 <footer class="foot">
   <div class="wrap foot-in">
     <nav aria-label="Links">
-      <a href="https://github.com/arjunkai/wormscore">GitHub</a>
-      <a href="https://github.com/arjunkai/wormscore/blob/main/docs/GUIDE.md">Guide</a>
-      <a href="https://github.com/arjunkai/wormscore/blob/main/docs/METHODS.md">Methods</a>
-      <a href="https://github.com/arjunkai/wormscore/releases">Releases</a>
-      <a href="https://github.com/arjunkai/wormscore/issues/new">Report a problem</a>
-      <a href="https://github.com/arjunkai/wormscore/blob/main/LICENSE">MIT license</a>
+      <a href="https://github.com/arjunkai/wormscore" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/arjunkai/wormscore/blob/main/docs/GUIDE.md" target="_blank" rel="noopener">Guide</a>
+      <a href="https://github.com/arjunkai/wormscore/blob/main/docs/METHODS.md" target="_blank" rel="noopener">Methods</a>
+      <a href="https://github.com/arjunkai/wormscore/releases" target="_blank" rel="noopener">Releases</a>
+      <a href="https://github.com/arjunkai/wormscore/issues/new" target="_blank" rel="noopener">Report a problem</a>
+      <a href="https://github.com/arjunkai/wormscore/blob/main/LICENSE" target="_blank" rel="noopener">MIT license</a>
     </nav>
-    <p>Made by <a href="https://github.com/arjunkai">Arjun Bansal</a>.</p>
-    <p>This site sets no cookies and has no tracking. It asks GitHub for the latest version number.</p>
+    <p>Made by <a href="https://github.com/arjunkai" target="_blank" rel="noopener">Arjun Bansal</a>.</p>
+    <p>This site sets no cookies and has no tracking. Your browser asks GitHub for the latest version number, to show it on this page.</p>
   </div>
 </footer>
 </body>

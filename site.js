@@ -19,8 +19,7 @@
     var v = String(rel.tag_name || "").replace(/^v/, "");
     if (!/^\d+(\.\d+)*$/.test(v)) return;
     document.getElementById("ver").textContent = "Version " + v;
-    var bib = document.getElementById("bib-ver");
-    if (bib) bib.textContent = v;
+    document.querySelectorAll(".cite-ver").forEach(function (el) { el.textContent = v; });
     if (/^https:\/\/github\.com\/arjunkai\/wormscore\//.test(rel.html_url || "")) {
       document.getElementById("notes").href = rel.html_url;
     }
@@ -42,22 +41,23 @@
       .catch(function () { /* keep "Latest version" */ });
   }
 
-  // 3. Copy the BibTeX.
-  var copy = document.getElementById("copy");
+  // 3. Copy a citation. Without a clipboard (or on plain http) the buttons stay hidden; the text can be selected.
   var status = document.getElementById("copy-status");
-  if (copy && navigator.clipboard && window.isSecureContext) {
-    copy.hidden = false;
-    var timer;
-    copy.addEventListener("click", function () {
-      var text = document.getElementById("bibtex").textContent;
-      navigator.clipboard.writeText(text).then(function () {
-        copy.textContent = "Copied";
-        status.textContent = "Citation copied.";
-      }, function () {
-        status.textContent = "Could not copy. Select the text and copy it instead.";
+  if (navigator.clipboard && window.isSecureContext) {
+    document.querySelectorAll("[data-copy]").forEach(function (btn) {
+      var timer;
+      btn.hidden = false;
+      btn.addEventListener("click", function () {
+        var text = document.getElementById(btn.getAttribute("data-copy")).textContent.replace(/\s+$/, "");
+        navigator.clipboard.writeText(text).then(function () {
+          btn.textContent = "Copied";
+          status.textContent = "Citation copied.";
+        }, function () {
+          status.textContent = "Could not copy. Select the text and copy it instead.";
+        });
+        clearTimeout(timer);
+        timer = setTimeout(function () { btn.textContent = "Copy"; status.textContent = ""; }, 2500);
       });
-      clearTimeout(timer);
-      timer = setTimeout(function () { copy.textContent = "Copy"; status.textContent = ""; }, 2500);
     });
   }
 })();
