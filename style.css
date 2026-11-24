@@ -149,7 +149,7 @@ pre { margin: 12px 0 0; padding: 12px 14px; background: var(--raised); border-ra
 .band pre { background: var(--panel); border: 1px solid var(--line); }
 .card .alt { margin-top: 16px; }
 .card .req { margin-top: 16px; font-size: 14px; }
-.pip { margin-top: 16px; }
+.col { display: grid; gap: 16px; }
 .after { margin-top: 32px; color: var(--muted); }
 
 /* ------------------------------------------------------------ cite */
@@ -204,3 +204,7 @@ pre { margin: 12px 0 0; padding: 12px 14px; background: var(--raised); border-ra
   .gh-btn { justify-content: center; }
   .meta .dot:last-of-type { display: none; }
 }
+
+/* ------------------------------------------------------------ 404 */
+.notfound h1 { font-size: 32px; }
+.notfound p { margin-top: 12px; color: var(--muted); }

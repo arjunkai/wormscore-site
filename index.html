@@ -10,13 +10,17 @@
 <meta name="theme-color" content="#f4f5f7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#121417" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="https://wormscore.com/">
+<link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="img/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="img/icon-192.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="wormscore">
 <meta property="og:description" content="Blind scoring of fluorescent neurons in C. elegans microscope images. Free, open source, runs on your computer.">
 <meta property="og:url" content="https://wormscore.com/">
-<meta property="og:image" content="https://wormscore.com/img/scoring.png">
+<meta property="og:image" content="https://wormscore.com/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The wormscore scoring page">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="style.css">
 <script src="site.js" defer></script>
@@ -70,7 +74,7 @@
     <figure class="shot">
       <picture>
         <source type="image/webp" srcset="img/scoring-1020.webp 1020w, img/scoring-2040.webp 2040w" sizes="(min-width: 1112px) 1080px, calc(100vw - 32px)">
-        <img src="img/scoring.png" width="2040" height="1140" alt="The scoring page: a coded image of a worm head with brightfield on, the list of codes on the left and the questions for each cell on the right">
+        <img src="img/scoring.png" fetchpriority="high" width="2040" height="1140" alt="The scoring page: a coded image of a worm head with brightfield on, the list of codes on the left and the questions for each cell on the right">
       </picture>
       <figcaption>The scoring page, with a real worm from the demo: an L2 head with the BAG neurons marked
         (flp-17::GFP), from Sun and Hobert 2021 (<a href="https://doi.org/10.5281/zenodo.5602160">Zenodo&nbsp;5602160</a>, CC&nbsp;BY&nbsp;4.0).</figcaption>
@@ -80,7 +84,7 @@
   <section class="band" id="how" aria-labelledby="how-h">
     <div class="wrap">
       <h2 id="how-h">How it works</h2>
-      <p class="intro">A project is five steps on the app's home page.</p>
+      <p class="intro">A project has five steps. The app's home page shows them in order.</p>
       <ol class="steps">
         <li><h3>Scan data</h3><p>Lists every image with its metadata and which channel is which.</p></li>
         <li><h3>Set scoring criteria</h3><p>Choose what to answer for each image. Start from a template or build your own.</p></li>
@@ -112,6 +116,7 @@
       <h2 id="install-h">Install</h2>
       <p class="intro">The apps are not signed, so the first time you open one the system asks before it runs.</p>
       <div class="grid two">
+        <div class="col">
         <div class="card">
           <h3>Windows</h3>
           <ol class="plain">
@@ -122,25 +127,26 @@
           <p class="req">Needs Windows 10 or 11.</p>
         </div>
         <div class="card">
+          <h3>With Python</h3>
+          <p>On any system with Python 3.12 or newer, including Intel Macs and Linux:</p>
+          <pre><code>pip install wormscore
+wormscore-launcher</code></pre>
+          <p class="req">For Nikon <code>.nd2</code> files: <code>pip install "wormscore[nd2]"</code>.</p>
+        </div>
+        </div>
+        <div class="card">
           <h3>Mac</h3>
           <ol class="plain">
             <li>Unzip the download and drag <code>wormscore.app</code> into Applications.</li>
             <li>Double-click it. In the warning, click <b>Done</b> (not Move to Trash).</li>
             <li>Open <b>System Settings &gt; Privacy &amp; Security</b>, scroll down to Security and click
-              <b>Open Anyway</b> next to wormscore. The button shows only after step 2.</li>
+              <b>Open Anyway</b> next to wormscore. The button shows only after step 2; if it is not there, do step 2 again.</li>
             <li>Click <b>Open Anyway</b> again and confirm with your password or Touch ID.</li>
           </ol>
           <p class="alt">Or run this once in Terminal instead. It removes the mark macOS puts on downloaded files and changes nothing else:</p>
           <pre><code>xattr -dr com.apple.quarantine /Applications/wormscore.app</code></pre>
-          <p class="req">Needs a Mac with Apple silicon (M1 or newer). The app opens in your web browser: use a normal window, not a Safari Private window.</p>
+          <p class="req">Needs a Mac with Apple silicon (M1 or newer). The app opens in your web browser. Use a normal window: Safari Private windows, Brave and Firefox with fingerprinting protection change the image data.</p>
         </div>
-      </div>
-      <div class="card pip">
-        <h3>With Python</h3>
-        <p>On any system with Python 3.12 or newer, including Intel Macs and Linux:</p>
-        <pre><code>pip install wormscore
-wormscore-launcher</code></pre>
-        <p class="req">For Nikon <code>.nd2</code> files: <code>pip install "wormscore[nd2]"</code>.</p>
       </div>
       <p class="after">New to it? Click <b>Try a demo...</b> in the app: 20 simulated worm heads in two genotypes, with the answers to check your calls against.
         The <a href="https://github.com/arjunkai/wormscore/blob/main/docs/GUIDE.md">user guide</a> covers every step.</p>
