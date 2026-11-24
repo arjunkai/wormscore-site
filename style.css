@@ -175,6 +175,7 @@ pre { margin: 12px 0 0; padding: 12px 14px; background: var(--raised); border-ra
 .foot a { color: var(--muted); }
 .foot a:hover { color: var(--text); }
 .foot p { margin-top: 16px; }
+.foot p + p { margin-top: 4px; }
 
 /* ------------------------------------------------------------ narrower screens */
 @media (max-width: 960px) {
