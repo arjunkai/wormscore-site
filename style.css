@@ -160,7 +160,7 @@ pre { margin: 12px 0 0; padding: 12px 14px; background: var(--raised); border-ra
 .after { margin-top: 32px; color: var(--muted); }
 
 /* ------------------------------------------------------------ cite */
-#cite > p { margin-top: 12px; max-width: 720px; color: var(--muted); }
+#cite .wrap > p:not(.status) { margin-top: 12px; max-width: 720px; color: var(--muted); }
 .cite + .cite { margin-top: 16px; }
 .cite-apa { padding: 16px; font-size: 15px; overflow-wrap: anywhere; }
 .cite { margin-top: 24px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--panel); overflow: hidden; }
@@ -172,6 +172,51 @@ pre { margin: 12px 0 0; padding: 12px 14px; background: var(--raised); border-ra
 }
 .copy:hover { background: var(--hover); }
 .status { margin-top: 8px; min-height: 1.6em; font-size: 14px; color: var(--muted); }
+
+/* ------------------------------------------------------------ hero extras, video */
+.also { margin: 8px auto 0; max-width: 600px; color: var(--muted); }
+.phone { margin: 28px auto 0; max-width: 460px; padding: 14px 16px; border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--panel); font-size: 15px; }
+.phone .copy { display: block; margin: 10px auto 0; }
+.video video { display: block; width: 100%; height: auto; border-radius: var(--radius-lg); border: 1px solid var(--shot-edge); background: #111417; box-shadow: 0 12px 40px rgba(20, 30, 40, .14); }
+@media (prefers-color-scheme: dark) { .video video { box-shadow: 0 12px 40px rgba(0, 0, 0, .5); } }
+.video figcaption { text-align: center; }
+.why { max-width: 760px; }
+
+/* ------------------------------------------------------------ what unblind writes */
+.out { margin-top: 32px; display: grid; gap: 24px; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); align-items: start; }
+.methods { margin: 0; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--bg); overflow: hidden; }
+.methods figcaption { padding: 8px 16px; border-bottom: 1px solid var(--line); font: 13px/1.6 var(--mono); color: var(--muted); }
+.methods-text { padding: 16px 20px 20px; font-size: 15px; line-height: 1.65; }
+.methods-text p + p { margin-top: 12px; }
+.methods-text .more { color: var(--muted); font-size: 14px; }
+.methods-text mark { background: var(--accent-soft); color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); border-radius: 3px; padding: 0 2px; }
+.files p { margin-top: 16px; color: var(--muted); font-size: 15px; }
+.files .plain li { color: var(--muted); }
+.files code { color: var(--text); }
+
+/* ------------------------------------------------------------ comparison table */
+.table-wrap { margin-top: 28px; overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--panel); }
+.cmp { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 620px; }
+.cmp th, .cmp td { text-align: left; vertical-align: top; padding: 12px 16px; border-top: 1px solid var(--line); }
+.cmp thead th { border-top: 0; font-size: 13px; font-weight: 600; color: var(--muted); }
+.cmp tbody th { font-weight: 600; width: 22%; }
+.cmp td { color: var(--muted); width: 39%; }
+.cmp td:last-child { color: var(--text); }
+
+/* ------------------------------------------------------------ install details */
+details summary { cursor: pointer; color: var(--accent); font-size: 15px; margin-top: 10px; width: fit-content; }
+details summary:hover { text-decoration: underline; text-underline-offset: 3px; }
+details summary:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+.card details[open] { margin-bottom: 4px; }
+details.cite summary { margin: 0; color: var(--muted); width: auto; list-style-position: inside; }
+details.cite summary:hover { text-decoration: none; color: var(--text); }
+details.cite:not([open]) summary { border-bottom: 0; }
+details.cite summary { justify-content: flex-start; gap: 8px; padding: 10px 16px; }
+details.cite summary::-webkit-details-marker { display: none; }
+details.cite summary::before { content: ""; width: 0; height: 0; border-style: solid; border-width: 5px 0 5px 7px; border-color: transparent transparent transparent currentColor; transition: transform .12s; }
+details.cite[open] summary::before { transform: rotate(90deg); }
+.bib-copy { display: flex; justify-content: flex-end; padding: 8px 8px 0; }
+#cite .cite { background: var(--bg); }
 
 /* ------------------------------------------------------------ privacy, footer */
 #privacy p + p { margin-top: 12px; }
@@ -195,6 +240,7 @@ pre { margin: 12px 0 0; padding: 12px 14px; background: var(--raised); border-ra
   .steps li::after { display: none; }
   .steps p { margin-top: 2px; }
   .grid { grid-template-columns: repeat(2, 1fr); }
+  .out { grid-template-columns: 1fr; }
 }
 @media (max-width: 720px) {
   .grid, .grid.two { grid-template-columns: 1fr; }

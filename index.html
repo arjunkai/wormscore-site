@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>wormscore</title>
+<title>wormscore: blind scoring of fluorescent neurons in C. elegans</title>
 <meta name="description" content="Free desktop app for blind scoring of fluorescent neurons in C. elegans microscope images. Runs on your computer, reads microscope files as they are, and writes the tables, tests and a draft Methods paragraph when you unblind.">
 <meta name="author" content="Arjun Bansal">
 <meta name="color-scheme" content="light dark">
@@ -14,7 +14,7 @@
 <link rel="icon" href="img/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="img/icon-192.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="wormscore">
+<meta property="og:title" content="wormscore: blind scoring of fluorescent neurons in C. elegans">
 <meta property="og:description" content="Blind scoring of fluorescent neurons in C. elegans microscope images. Free, open source, runs on your computer.">
 <meta property="og:url" content="https://wormscore.org/">
 <meta property="og:image" content="https://wormscore.org/img/og.png">
@@ -50,6 +50,7 @@
     <nav class="top-nav" aria-label="Site">
       <a href="#how">How it works</a>
       <a href="#install">Install</a>
+      <a href="#output">Results</a>
       <a href="#cite">Cite</a>
       <a href="https://github.com/arjunkai/wormscore" target="_blank" rel="noopener">GitHub</a>
     </nav>
@@ -63,6 +64,10 @@
     <p class="lede">Blind scoring of fluorescent neurons in <i>C.&nbsp;elegans</i> microscope images.</p>
     <p class="sub">You score coded images without knowing the genotype. wormscore keeps the genotype key sealed, measures
       the cells, and writes the tables, the tests and a draft Methods paragraph when you unblind. Free and open source.</p>
+    <p class="also">Not only for worms: nothing is tied to one neuron, marker or organism.</p>
+
+    <p class="phone" id="phone" hidden>wormscore is a desktop app for Windows and Mac. Open this page on your computer to download it.
+      <button type="button" class="copy" id="share" hidden>Send the link to yourself</button></p>
 
     <div class="dl" role="group" aria-label="Download">
       <a class="dl-btn" id="dl-win" href="https://github.com/arjunkai/wormscore/releases/latest/download/wormscore-windows.zip">
@@ -109,22 +114,26 @@
         <li><h3>Score</h3><p>Answer the questions for each coded image, and outline cells to measure them if you like.</p></li>
         <li><h3>Unblind</h3><p>Reveals the genotypes and writes the results, the tests and a draft Methods paragraph.</p></li>
       </ol>
-      <figure class="shot home-shot">
-        <picture>
-          <source type="image/webp" media="(prefers-color-scheme: dark)" srcset="img/home-dark-960.webp 960w, img/home-dark-1920.webp 1920w" sizes="(min-width: 1112px) 1080px, calc(100vw - 32px)">
-          <source type="image/webp" srcset="img/home-960.webp 960w, img/home-1920.webp 1920w" sizes="(min-width: 1112px) 1080px, calc(100vw - 32px)">
-          <img src="img/home-960.webp" width="1920" height="981" loading="lazy" decoding="async" alt="The app's home page for a project: Scan data, Set scoring criteria and Build blind set are done, Score is next, then Unblind, with optional cards for a second scorer and a practice set below">
-        </picture>
+      <figure class="shot video">
+        <video controls muted playsinline preload="none" poster="img/demo-poster.webp" width="1920" height="1080"
+          aria-label="Screen recording: a project from Scan data to Unblind">
+          <source src="img/demo.mp4" type="video/mp4">
+        </video>
+        <figcaption>One project from start to finish, with the four real worm heads of the demo. One minute, no sound;
+          waiting and the last three images are sped up.</figcaption>
       </figure>
       <p class="formats">Reads microscope files as they are: Leica <code>.lif</code>, Zeiss <code>.czi</code>,
         Nikon <code>.nd2</code>, Olympus <code>.oib</code>, <code>.oif</code> and <code>.oir</code>, OME-TIFF and
-        ImageJ hyperstack TIFF. The reporter channel is read from the file's metadata, never guessed.
-        Nothing is tied to one neuron, marker or organism.</p>
+        ImageJ hyperstack TIFF. The reporter channel is read from the file's metadata, never guessed.</p>
     </div>
   </section>
 
   <section class="wrap sect" id="why" aria-labelledby="why-h">
-    <h2 id="why-h">Why it matters</h2>
+    <h2 id="why-h">What you get</h2>
+    <p class="intro why">Calls made while knowing the genotype lean toward the expected result. In matched experiments, the ones
+      scored without blinding reported effects about 27% larger
+      (<a href="https://doi.org/10.1371/journal.pbio.1002190" target="_blank" rel="noopener">Holman et al. 2015</a>), and
+      ARRIVE 2.0 asks papers to say who knew the groups at each stage. wormscore makes blinding the default and keeps the record.</p>
     <div class="grid">
       <div class="card"><h3>Blind until you finish</h3><p>Genotypes and file names stay in a sealed key until scoring is done. No genotype or file name reaches the scoring page.</p></div>
       <div class="card"><h3>Hidden repeats</h3><p>Some images can come back a second time under new codes. Unblinding reports how consistently you scored them.</p></div>
@@ -135,19 +144,72 @@
     </div>
   </section>
 
+  <section class="band" id="output" aria-labelledby="output-h">
+    <div class="wrap">
+      <h2 id="output-h">What Unblind writes</h2>
+      <p class="intro">From the project in the video. The draft Methods text is built from the project's own files and log;
+        what only you know is left in [brackets] to fill in.</p>
+      <div class="out">
+        <figure class="methods">
+          <figcaption>methods_text.md (part)</figcaption>
+          <div class="methods-text">
+            <p><b>Blinded scoring.</b> … Images were then coded and scored blind with wormscore 1.26.28 (https://github.com/arjunkai/wormscore). Inclusion rules were set before scoring and applied without regard to genotype: 4 of 4 images were included. On 2026-11-25, <mark>[name]</mark> assigned every included image a random code; the key linking codes to files and genotypes was kept in a separate folder that the scoring software does not read. <mark>[name]</mark> scored the coded images on 2026-11-25, seeing no file names, genotypes or brightness measurements, with every image from the same microscope shown at the same fixed brightness range. Each neuron was called normal, dim or missing; dim or missing counted as affected. Codes were linked back to genotypes on 2026-11-25, after 4 images had been scored.</p>
+            <p><b>Statistics.</b> Each animal was one image and the unit of analysis. Penetrance was the share of animals with at least one affected neuron. An animal was affected if at least one neuron was called dim or missing. The share of affected animals was compared by two-sided Fisher's exact test (every pair of genotypes), only between animals imaged on the same microscope, with Bonferroni correction for 1 test.</p>
+            <p class="more">It goes on with Measurement, a table of images per genotype and microscope, the imaging settings read from each file, and a table of who knew the genotype at each stage (ARRIVE 2.0 item 5).</p>
+          </div>
+        </figure>
+        <div class="files">
+          <h3>And the tables</h3>
+          <ul class="plain">
+            <li><code>penetrance.csv</code>: affected animals per genotype</li>
+            <li><code>fisher_tests.csv</code>: the planned tests, corrected for the number of comparisons</li>
+            <li><code>per_neuron.csv</code>: every call for every neuron</li>
+            <li><code>merged.csv</code>: scores, measurements and genotypes, one row per image, each linked to its file and checksum</li>
+            <li><code>summary.txt</code>: all of it in plain words</li>
+          </ul>
+          <p>With hidden repeats or a second scorer, Unblind also reports how well the calls agree (percent agreement and Cohen's kappa).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap sect" id="compare" aria-labelledby="compare-h">
+    <h2 id="compare-h">Compared with doing it by hand</h2>
+    <p class="intro">The usual way: a labmate renames the files and keeps the key in a spreadsheet, you score in Fiji, and the
+      rest is done by hand.</p>
+    <div class="table-wrap">
+      <table class="cmp">
+        <thead><tr><th scope="col"></th><th scope="col">Fiji, a spreadsheet and a labmate</th><th scope="col">wormscore</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Hiding the genotype</th><td>Renamed copies; the original name can stay in the file's metadata</td><td>Coded images with nothing of the original; the key is sealed until Unblind</td></tr>
+          <tr><th scope="row">Calls per neuron</th><td>Typed into a spreadsheet</td><td>A form for each image, with your criteria</td></tr>
+          <tr><th scope="row">Brightness</th><td>Measured by hand, and seen while scoring</td><td>Measured for you, hidden until Unblind</td></tr>
+          <tr><th scope="row">Consistency</th><td>Checked only if someone sets it up</td><td>Hidden repeats and a second scorer, with agreement reported</td></tr>
+          <tr><th scope="row">Record and Methods</th><td>Written up afterwards</td><td>Every step in log.md, and a draft Methods paragraph</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="after">How wormscore compares with Fiji Blind Analysis Tools, SIAL, Blinder, Tyche, NeuroPAL ID and others:
+      <a href="https://github.com/arjunkai/wormscore/blob/main/docs/COMPARISON.md" target="_blank" rel="noopener">comparison with other tools</a>.</p>
+  </section>
+
   <section class="band" id="install" aria-labelledby="install-h">
     <div class="wrap">
       <h2 id="install-h">Install</h2>
-      <p class="intro">The apps are not signed, so Windows and macOS ask before opening them the first time.</p>
+      <p class="intro">Unzip the download and open wormscore. The apps are not signed yet, so the first time you open one,
+        Windows or macOS asks you to confirm.</p>
       <div class="grid two">
         <div class="col">
         <div class="card">
           <h3>Windows</h3>
-          <ol class="plain">
-            <li>Unzip the download and double-click <code>wormscore.exe</code>.</li>
-            <li>If you see <q>Windows protected your PC</q>, click <b>More info</b>, then <b>Run anyway</b>.
-              If you see <q>The publisher could not be verified</q>, click <b>Run</b>.</li>
-          </ol>
+          <p>Unzip the download and double-click <code>wormscore.exe</code>.</p>
+          <details id="first-win">
+            <summary>If Windows says it protected your PC</summary>
+            <ol class="plain">
+              <li>Click <b>More info</b>, then <b>Run anyway</b>.</li>
+              <li>If you see <q>The publisher could not be verified</q>, click <b>Run</b>.</li>
+            </ol>
+          </details>
           <p class="req">Needs Windows 10 or 11.</p>
         </div>
         <div class="card">
@@ -160,15 +222,18 @@ wormscore-launcher</code></pre>
         </div>
         <div class="card">
           <h3>Mac</h3>
-          <ol class="plain">
-            <li>Unzip the download and drag <code>wormscore.app</code> into Applications.</li>
-            <li>Double-click it. In the warning, click <b>Done</b> (not Move to Trash).</li>
-            <li>Open <b>System Settings &gt; Privacy &amp; Security</b>, scroll down to Security and click
-              <b>Open Anyway</b> next to wormscore. The button shows only after step 2; if it is not there, do step 2 again.</li>
-            <li>Click <b>Open Anyway</b> again and confirm with your password or Touch ID.</li>
-          </ol>
-          <p class="alt">Or run this once in Terminal instead. It removes the mark macOS puts on downloaded files and changes nothing else:</p>
-          <pre><code>xattr -dr com.apple.quarantine /Applications/wormscore.app</code></pre>
+          <p>Unzip the download, drag <code>wormscore.app</code> into Applications and double-click it.</p>
+          <details id="first-mac">
+            <summary>The first time, macOS stops it. To open it:</summary>
+            <ol class="plain">
+              <li>In the warning, click <b>Done</b> (not Move to Trash).</li>
+              <li>Open <b>System Settings &gt; Privacy &amp; Security</b>, scroll down to Security and click
+                <b>Open Anyway</b> next to wormscore. The button shows only after step 1; if it is not there, open the app and do step 1 again.</li>
+              <li>Click <b>Open Anyway</b> again and confirm with your password or Touch ID.</li>
+            </ol>
+            <p class="alt">Or run this once in Terminal instead. It removes the mark macOS puts on downloaded files and changes nothing else:</p>
+            <pre><code>xattr -dr com.apple.quarantine /Applications/wormscore.app</code></pre>
+          </details>
           <p class="req">Needs a Mac with Apple silicon (M1 or newer). The app opens in your web browser. Use a normal window: Safari Private windows, Brave and Firefox with fingerprinting protection change the image data.</p>
         </div>
       </div>
@@ -177,36 +242,8 @@ wormscore-launcher</code></pre>
     </div>
   </section>
 
-  <section class="wrap sect" id="cite" aria-labelledby="cite-h">
-    <h2 id="cite-h">Cite</h2>
-    <p>If you use wormscore in research, please cite the version you used. The citations below name the
-      latest version; in the app, <b>Settings &gt; Copy citation</b> gives the one you have. The DOI
-      <a href="https://doi.org/10.5281/zenodo.23520610" target="_blank" rel="noopener">10.5281/zenodo.23520610</a> covers all versions, and each release also has its own.</p>
-    <div class="cite">
-      <div class="cite-head">
-        <span id="apa-h">APA</span>
-        <button type="button" class="copy" data-copy="apa" aria-label="Copy APA citation" hidden>Copy</button>
-      </div>
-      <p class="cite-apa" id="apa" tabindex="0" aria-labelledby="apa-h">Bansal, A. (2026). <i>wormscore: blind scoring and fluorescence measurement of neurons in confocal z-stacks</i> (Version <span class="cite-ver">1.26.27</span>) [Computer software]. https://doi.org/10.5281/zenodo.23520610</p>
-    </div>
-    <div class="cite">
-      <div class="cite-head">
-        <span id="bib-h">BibTeX</span>
-        <button type="button" class="copy" data-copy="bibtex" aria-label="Copy BibTeX citation" hidden>Copy</button>
-      </div>
-      <pre id="bibtex" tabindex="0" aria-labelledby="bib-h"><code>@software{Bansal_wormscore_2026,
-  author = {Bansal, Arjun},
-  doi = {10.5281/zenodo.23520610},
-  title = {{wormscore: blind scoring and fluorescence measurement of neurons in confocal z-stacks}},
-  url = {https://github.com/arjunkai/wormscore},
-  version = {<span class="cite-ver">1.26.27</span>},
-  year = {2026}
-}</code></pre>
-    </div>
-    <p class="status" id="copy-status" role="status" aria-live="polite"></p>
-  </section>
 
-  <section class="band" id="privacy" aria-labelledby="privacy-h">
+  <section class="sect" id="privacy" aria-labelledby="privacy-h">
     <div class="wrap narrow">
       <h2 id="privacy-h">Privacy</h2>
       <p>wormscore runs on your computer. Your images, projects and scores never leave it.</p>
@@ -216,6 +253,35 @@ wormscore-launcher</code></pre>
         <li>installing an update you choose</li>
         <li>downloading the optional real-worm demo images</li>
       </ul>
+    </div>
+  </section>
+
+  <section class="band" id="cite" aria-labelledby="cite-h">
+    <div class="wrap">
+    <h2 id="cite-h">Cite</h2>
+    <p>If you use wormscore in research, please cite the version you used. In the app, <b>Settings &gt; Copy citation</b>
+      gives the one you have. The DOI <a href="https://doi.org/10.5281/zenodo.23520610" target="_blank" rel="noopener">10.5281/zenodo.23520610</a>
+      covers all versions.</p>
+    <div class="cite">
+      <div class="cite-head">
+        <span id="apa-h">APA, latest version</span>
+        <button type="button" class="copy" data-copy="apa" aria-label="Copy APA citation" hidden>Copy</button>
+      </div>
+      <p class="cite-apa" id="apa" tabindex="0" aria-labelledby="apa-h">Bansal, A. (2026). <i>wormscore: blind scoring and fluorescence measurement of neurons in confocal z-stacks</i> (Version <span class="cite-ver">1.26.28</span>) [Computer software]. https://doi.org/10.5281/zenodo.23520610</p>
+    </div>
+    <details class="cite">
+      <summary class="cite-head"><span id="bib-h">BibTeX</span></summary>
+      <div class="bib-copy"><button type="button" class="copy" data-copy="bibtex" aria-label="Copy BibTeX citation" hidden>Copy</button></div>
+      <pre id="bibtex" tabindex="0" aria-labelledby="bib-h"><code>@software{Bansal_wormscore_2026,
+  author = {Bansal, Arjun},
+  doi = {10.5281/zenodo.23520610},
+  title = {{wormscore: blind scoring and fluorescence measurement of neurons in confocal z-stacks}},
+  url = {https://github.com/arjunkai/wormscore},
+  version = {<span class="cite-ver">1.26.28</span>},
+  year = {2026}
+}</code></pre>
+    </details>
+    <p class="status" id="copy-status" role="status" aria-live="polite"></p>
     </div>
   </section>
 </main>
@@ -228,6 +294,7 @@ wormscore-launcher</code></pre>
       <a href="https://github.com/arjunkai/wormscore/blob/main/docs/METHODS.md" target="_blank" rel="noopener">Methods</a>
       <a href="https://github.com/arjunkai/wormscore/blob/main/docs/COMPARISON.md" target="_blank" rel="noopener">Comparison with other tools</a>
       <a href="https://github.com/arjunkai/wormscore/releases" target="_blank" rel="noopener">Releases</a>
+      <a href="https://github.com/arjunkai/wormscore/discussions" target="_blank" rel="noopener">Ask a question</a>
       <a href="https://github.com/arjunkai/wormscore/issues/new" target="_blank" rel="noopener">Report a problem</a>
       <a href="https://github.com/arjunkai/wormscore/blob/main/LICENSE" target="_blank" rel="noopener">MIT license</a>
     </nav>

@@ -9,10 +9,40 @@
     platform = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.userAgent || "";
   } catch (e) { /* leave both plain */ }
   var mine = /win/i.test(platform) ? "dl-win" : /mac/i.test(platform) ? "dl-mac" : null;
-  if (mine && !/iphone|ipad|android/i.test(platform)) {
+  var ua = "";
+  try { ua = navigator.userAgent || ""; } catch (e) { /* fine */ }
+  // iPadOS reports itself as a Mac; a touch screen tells them apart
+  var phone = /iphone|ipad|android/i.test(platform + " " + ua) || (/mac/i.test(platform) && navigator.maxTouchPoints > 1);
+  if (mine && !phone) {
     var btn = document.getElementById(mine);
     if (btn) btn.classList.add("mine");
   }
+
+  // 1b. On a phone or tablet: say it is a desktop app, and offer to send the link on.
+  if (phone) {
+    var note = document.getElementById("phone");
+    if (note) note.hidden = false;
+    var share = document.getElementById("share");
+    if (share && navigator.share) {
+      share.hidden = false;
+      share.addEventListener("click", function () {
+        navigator.share({ title: "wormscore", url: "https://wormscore.org/" }).catch(function () { /* closed */ });
+      });
+    }
+  }
+
+  // 1c. After a download starts, open the first-time steps for that system and scroll to them.
+  [["dl-win", "first-win"], ["dl-mac", "first-mac"]].forEach(function (pair) {
+    var link = document.getElementById(pair[0]), steps = document.getElementById(pair[1]);
+    if (!link || !steps) return;
+    link.addEventListener("click", function () {
+      steps.open = true;
+      setTimeout(function () {
+        var card = steps.closest(".card") || steps;
+        card.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 300);
+    });
+  });
 
   // 2. Latest version from GitHub (60 requests an hour per visitor without a token; kept for the visit).
   function show(rel) {
