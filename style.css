@@ -219,8 +219,8 @@ details.cite[open] summary::before { transform: rotate(90deg); }
 #cite .cite { background: var(--bg); }
 
 /* ------------------------------------------------------------ privacy, footer */
-#privacy p + p { margin-top: 12px; }
-#privacy h2 + p { margin-top: 16px; }
+#privacy p + p, #thanks p + p { margin-top: 12px; }
+#privacy h2 + p, #thanks h2 + p { margin-top: 16px; }
 #privacy p, #privacy li { color: var(--muted); }
 #privacy .plain { max-width: 720px; }
 #privacy p:first-of-type { color: var(--text); font-size: 18px; }
